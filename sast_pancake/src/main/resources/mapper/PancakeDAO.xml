@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sast_pancake.mapper.PancakeDAO">
+
+    <resultMap id="PancakeResultMap" type="com.example.sast_pancake.pojo.Pancake">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="create_time" property="createTime"/>
+        <result column="ddl" property="ddl"/>
+        <result column="is_done" property="isDone"/>
+
+    </resultMap>
+
+   <select id="getAll" resultMap="PancakeResultMap">
+       select * from pancake
+   </select>
+
+    <insert id="insert" parameterType="com.example.sast_pancake.pojo.Pancake" useGeneratedKeys="true" keyProperty="id">
+        insert into pancake(title,create_time,ddl,is_done)
+        values (#{title},#{createTime},#{ddl},#{isDone})
+    </insert>
+
+    <update id="update" parameterType="com.example.sast_pancake.pojo.Pancake">
+        update pancake
+        <set>
+                is_done=1
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="com.example.sast_pancake.pojo.Pancake">
+    delete from pancake
+    where id=#{id}
+
+    </delete>
+
+    <select id="getById" resultMap="PancakeResultMap">
+        select * from pancake where id=#{id}
+    </select>
+
+</mapper>

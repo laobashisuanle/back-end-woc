@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.sast_pancake.mapper.UserDAO">
+
+    <resultMap id="UserResultMap" type="com.example.sast_pancake.pojo.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="role" property="role"/>
+
+    </resultMap>
+
+    <select id="getByUserName" resultMap="UserResultMap">
+        select * from user where username=#{username}
+    </select>
+
+    <select id="getById" resultMap="UserResultMap">
+        select * from user where id=#{id}
+    </select>
+
+    <insert id="add" parameterType="com.example.sast_pancake.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user(username,password,role)
+        values (#{username},#{password},#{role})
+    </insert>
+
+</mapper>
